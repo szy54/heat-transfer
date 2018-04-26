@@ -12,7 +12,7 @@
 #define PR 4
 #endif
 
-module gaussian_e
+module gauss
     implicit none
 
 contains
@@ -22,17 +22,17 @@ contains
             real(kind=PR), intent(inout):: A(N,N)
             real(kind=PR), intent(inout)::X(N)
             real(kind=PR) ::c
-            integer ::I,J
+            integer(kind=8) ::I,J
 
             do i=1,N
-                do J=0,N
+                do J=1,N
                     if( I .NE. J) THEN
-                        C=A(I,J+1)/A(I,I+1)
-                        A(:,J+1)=A(:,J+1)-C*A(:,I+1)
-
-                        X(J+1)=X(J+1)-C*X(I+1)
+                        C=A(I,J)/A(I,I)
+                        A(:,J)=A(:,J)-C*A(:,I)
+                        X(J) = X(J) - C*X(I)
+                        X(I) = X(I) / A(I,I)
                     end if
                 end do
             end do
         end subroutine eliminate
-end module gaussian_e
+end module gauss

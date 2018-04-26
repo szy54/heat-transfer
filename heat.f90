@@ -3,16 +3,16 @@
 #endif
 
 program main
-    use gaussian_e
+    use gauss
     implicit none
 
     !vars
-    integer :: i, N
+    integer(kind=8) :: i, N
     character(len=8):: arg
     real(kind=PR), allocatable :: A(:, :), X(:)
     real(kind=PR) :: h, P13, P2
     ! P13== P1 == P3
-
+    real(kind=16) :: eps
 
     !get arg which program was called with
     call get_command_argument(1, arg)
@@ -42,6 +42,10 @@ program main
         end if
         A(I,I)=P2
     end do
+
+    eps=0
+
+    call eliminate(A,X,N)
 
     write(*,*) A
 

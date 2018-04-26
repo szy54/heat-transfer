@@ -18,8 +18,8 @@ module gaussian_e
 contains
         subroutine eliminate(A,X,N)
             implicit none
-            real(kind=PR), intent(inout):: A(N,N)
             integer(kind=8), intent(in):: N
+            real(kind=PR), intent(inout):: A(N,N)
             real(kind=PR), intent(inout)::X(N)
             real(kind=PR) ::c
             integer ::I,J

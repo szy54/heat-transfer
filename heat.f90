@@ -13,6 +13,7 @@ program main
     !get arg which program was called with
     call get_command_argument(1, arg)
     write(*,*) arg
-
+    read(arg(1:len_trim(arg)), '(i8)') N
+    write(*,*) N
 
 end program main

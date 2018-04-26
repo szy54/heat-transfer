@@ -32,16 +32,16 @@ program main
     X(N)=1
 
     !fill in the matrix
-    A(1, 3)=P13
-    A(1,2)=P2
 
-    do I=2,N-2
-        A(I, 1)=P13
-        A(I,2)=P2
-        A(I,3)=P13
+    do I=1,N
+        if( I .NE. N) then
+            A(I, I+1) = P13
+        end if
+        if(I .NE. 1) then
+            A(I,I-1) = P13
+        end if
+        A(I,I)=P2
     end do
-    A(N-1,2)=P2
-    A(N-1,1)=P13
 
     write(*,*) A
 

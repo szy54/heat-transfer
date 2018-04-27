@@ -18,7 +18,7 @@ program main
     call get_command_argument(1, arg)
     !write(*,*) arg
     read(arg(1:len_trim(arg)), '(i8)') N
-    !write(*,*) N
+    write(*,*) N
 
     h = 1./N
     P13=1/(h*h)
@@ -51,7 +51,7 @@ program main
     do I=N-1,1,-1
         W(I)=X(I)-A(I+1,I)*W(I+1)
     end do
-    write(*,*) W
+    !write(*,*) W
 
     eps=0
 

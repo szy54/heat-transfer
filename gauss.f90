@@ -31,10 +31,10 @@ contains
                         A(:,J)=A(:,J)-C*A(:,I)
                         X(J) = X(J) - C*X(I)
                         X(I) = X(I) / A(I,I)
-
+                        A(:,I)=A(:,I)/A(I,I)
                     end if
                 end do
-                A(:,I)=A(:,I)/A(I,I)
+
             end do
         end subroutine eliminate
 end module gauss

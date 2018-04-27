@@ -16,23 +16,24 @@ module gauss
     implicit none
 
 contains
-        subroutine eliminate(A,X,N)
-            implicit none
-            integer(kind=8), intent(in):: N
-            real(kind=PR), intent(inout):: A(N,N)
-            real(kind=PR), intent(inout)::X(N)
-            real(kind=PR) ::c
-            integer(kind=8) ::I,J
+    subroutine eliminate(A,X,N)
+        implicit none
+        integer(kind=8), intent(in):: N
+        real(kind=PR), intent(inout):: A(N-1,3)
+        real(kind=PR), intent(inout)::X(N-1)
+        real(kind=PR) ::C
+        integer(kind=8) ::I,J
 
-            do i=1,N
-                do J=1,N
-                    if( I .NE. J) THEN
-                        C=A(I,J)/A(I,I)
-                        A(:,J)=A(:,J)-C*A(:,I)
-                        X(J) = X(J) - C*X(I)
-                        X(I) = X(I) / A(I,I)
-                    end if
-                end do
-            end do
-        end subroutine eliminate
+        X(1)=X(1)/A(1,2)
+        A(1,:)=A(1,:)/A(1,2)
+
+        do I=2,N-1
+            C=A(I,1)/A(I-1,2)
+            A(I,1) = A(I,1) - C * A(I-1,2);
+            A(I,2) = A(I,2) - C * A(I-1,3);
+            X(I) = X(I) - C * X(I-1);
+            X(I) = X(I)/A(I,2);
+            A(I,:) = A(I,:)/A(I,2);
+        end do
+    end subroutine eliminate
 end module gauss

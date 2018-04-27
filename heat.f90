@@ -42,13 +42,20 @@ program main
         end if
         A(I,I)=P2
     end do
-
+    write(*,*) A
+    write(*,*) "wynik"
     eps=0
 
     call eliminate(A,X,N)
 
     write(*,*) A
 
+    do I=1,N
+        eps=eps + abs(X(I) - real(I)/real(N))
+    end do
+    eps=eps/N
+    !write(*,*) eps
+    !write(*,*) X
     deallocate(A)
     deallocate(X)
 
